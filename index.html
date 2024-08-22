@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #2c2c2c;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+            max-width: 90%;
+        }
+        h2 {
+            color: #f4f4f4;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            border-color: #004494;
+        }
+        h3 {
+            color: #f4f4f4;
+            margin-top: 25px;
+            font-size: 20px;
+        }
+        .result {
+            font-weight: bold;
+            font-size: 22px;
+            color: #28a745;
+            margin-top: 10px;
+        }
+        .tie {
+            font-weight: bold;
+            font-size: 22px;
+            color: #ffc107;
+            margin-top: 10px;
+        }
+        .lose {
+            font-weight: bold;
+            font-size: 22px;
+            color: #dc3545;
+            margin-top: 10px;
+        }
+        #userChoice, #computerChoice {
+            font-weight: bold;
+            color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Rock-Paper-Scissors</h2>
+        <button onclick="playGame('rock')">Rock</button>
+        <button onclick="playGame('paper')">Paper</button>
+        <button onclick="playGame('scissors')">Scissors</button>
+
+        <h3>You chose: <span id="userChoice"></span></h3>
+        <h3>Computer chose: <span id="computerChoice"></span></h3>
+        <h3>Result: <span id="result"></span></h3>
+    </div>
+
+    <script>
+        function playGame(userChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+            document.getElementById("userChoice").textContent = userChoice.charAt(0).toUpperCase() + userChoice.slice(1);
+            document.getElementById("computerChoice").textContent = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+
+            let result = "";
+
+            if (userChoice === computerChoice) {
+                result = "It's a tie!";
+                document.getElementById("result").className = "tie";
+            } else if (
+                (userChoice === 'rock' && computerChoice === 'scissors') ||
+                (userChoice === 'paper' && computerChoice === 'rock') ||
+                (userChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = "You win!";
+                document.getElementById("result").className = "result";
+            } else {
+                result = "You lose!";
+                document.getElementById("result").className = "lose";
+            }
+
+            document.getElementById("result").textContent = result;
+        }
+    </script>
+</body>
+</html>
